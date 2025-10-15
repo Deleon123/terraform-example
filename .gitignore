@@ -1,0 +1,9 @@
+plan.out
+terraform.tfstate
+terraform.tfstate.backup
+.terraform
+.terraform.lock.hcl
+aws-key.pub
+azure-key.pub
+aws-key
+azure-key
