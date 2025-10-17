@@ -1,13 +1,17 @@
 resource "azurerm_resource_group" "rgazure1" {
-  name     = var.resource_group_name
-  location = var.location
+  for_each = var.location
+
+  name     = "rg_${each.key}"
+  location = each.value
   tags     = local.common_tags
 }
 
 resource "azurerm_storage_account" "storage_account" {
-  name                     = var.storage_account_name
-  resource_group_name      = azurerm_resource_group.rgazure1.name
-  location                 = var.location
+  for_each = azurerm_resource_group.rgazure1
+
+  name                     = "deleonsa${each.key}"
+  resource_group_name      = each.value.name
+  location                 = each.value.location
   account_tier             = var.account_tier
   account_replication_type = var.account_replication_type
   tags                     = local.common_tags
@@ -18,7 +22,9 @@ resource "azurerm_storage_account" "storage_account" {
 }
 
 resource "azurerm_storage_container" "storage_container" {
-  name                  = var.storage_container_name
-  storage_account_name  = azurerm_storage_account.storage_account.name
+  for_each = azurerm_storage_account.storage_account
+
+  name                  = "container-each-${each.key}"
+  storage_account_name  = each.value.name
   container_access_type = "private"
 }

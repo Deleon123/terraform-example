@@ -167,16 +167,16 @@ terraform output vm_ip
 │         Azure Resource Group        │
 │         rg-vm-terraform             │
 │                                     │
-│  ┌─────────────────────────────────┐ │
-│  │      Linux Virtual Machine      │ │
-│  │      Ubuntu 18.04 LTS           │ │
-│  │      Standard_B1s               │ │
-│  │                                 │ │
-│  │  ┌─────────────────────────────┐ │ │
-│  │  │    Network Interface        │ │ │
-│  │  │    + Public IP              │ │ │
-│  │  └─────────────────────────────┘ │ │
-│  └─────────────────────────────────┘ │
+│  ┌─────────────────────────────────┐│
+│  │      Linux Virtual Machine      ││
+│  │      Ubuntu 18.04 LTS           ││
+│  │      Standard_B1s               ││
+│  │                                 ││
+│  │  ┌─────────────────────────────┐││
+│  │  │    Network Interface        │││
+│  │  │    + Public IP              │││
+│  │  └─────────────────────────────┘││
+│  └─────────────────────────────────┘│
 │                                     │
 │  Connects to azure-vnet/ network    │
 └─────────────────────────────────────┘
