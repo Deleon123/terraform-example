@@ -10,7 +10,7 @@ terraform {
 
   backend "s3" {
     bucket = "deleon-bucket-aws-remote-state"
-    key    = "aws-vm-local-module/terraform.tfstate"
+    key    = "aws-lifecycle-aws/terraform.tfstate"
     region = "sa-east-1"
   }
 }
@@ -27,9 +27,12 @@ provider "aws" {
   }
 }
 
-module "network" {
-  source      = "./network"
-  cidr_vpc    = "10.0.0.0/16"
-  cidr_subnet = "10.0.1.0/24"
-  environment = "vm-${var.environment}"
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = "deleon-bucket-aws-remote-state"
+    key    = "aws-vpc/terraform.tfstate"
+    region = "sa-east-1"
+  }
 }
+

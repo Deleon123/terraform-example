@@ -10,9 +10,8 @@ resource "aws_instance" "vm" {
   subnet_id                   = module.network.subnet_id
   vpc_security_group_ids      = [module.network.security_group_id]
   associate_public_ip_address = true
-  user_data                   = file("./docs/docker.sh")
 
   tags = {
-    Name = "vm-terraform"
+    Name = "vm-${var.environment}"
   }
 }
