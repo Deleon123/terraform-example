@@ -1,0 +1,30 @@
+stages:
+  - validate
+  - plan_apply
+  - destroy
+
+.template:
+  image: hashicorp/terraform:1.13
+  entrypoint: [""]
+  before_script:
+    - terraform init
+
+validate:
+  extends: .template
+  stage: validate
+  script:
+    - terraform validate
+
+plan & apply:
+  extends: .template
+  stage: plan_apply
+  script:
+    - terraform plan -out=terraform.plan
+    - terraform apply terraform.plan
+
+destroy:
+  extends: .template
+  stage: destroy
+  script:
+    - terraform destroy -auto-approve
+  when: manual
